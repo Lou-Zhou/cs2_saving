@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\newcommand{\cont}{\subseteq}
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax% just so we can load this and rsfs
+\usepackage[scr]{rsfso}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue,
+citecolor=blue, urlcolor=blue]{hyperref}
+
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\newcommand{\ddx}{\frac{d}{dx}}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\newcommand{\dfdx}{\frac{df}{dx}}
+\newcommand{\ddxp}[1]{\frac{d}{dx}\left( #1 \right)}
+\newcommand{\dydx}{\frac{dy}{dx}}
+\let\ds\displaystyle
+\newcommand{\intx}[1]{\int #1 \, dx}
+\newcommand{\intt}[1]{\int #1 \, dt}
+\newcommand{\defint}[3]{\int_{#1}^{#2} #3 \, dx}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\un}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newtheorem*{sol}{Solution}
+\newtheorem*{claim}{Claim}
+\newtheorem{problem}{Problem}
+\setlength{\parindent}{0pt}
+\begin{document}
+ 
+% EVERYTHING ABOVE THIS LINE IS JUST PREABLE, NO NEED TO MESS WITH IT.__________________________________________________________________________________________
+%
+
+\lhead{SMGT 490}
+\chead{Lou Zhou}
+\rhead{\today}
+ 
+% \maketitle
+\begin{center}
+\textbf{\Large{SMGT 490 Project Statement}}
+\end{center}
+
+\section{Research Question}
+
+The heart of Counter-Strike 2 (CS2), a team-based shooter where each round is a 5v5 matchup and the first to reach 13 rounds wins the match, is the economy system. Through this system, each round, teams earn money based on what happened during the previous round. That money determines what equipment (e.g. more powerful weapons, armor, or other utility items) they can afford next. Therefore, success in CS2 depends not only on mechanical skill but on long-term resource management. 
+\bigbreak
+Teams must decide whether to spend aggressively to maximize the chances of winning a single round or conserve resources in hopes of stronger opportunities down the line. Poor financial decisions can weaken a team for multiple rounds, while strong saving can allow for the course of a game to change.
+\bigbreak
+Given the importance of the economy system, a central concept is saving, which is the deliberate decision to give up and retreat if the team realizes mid-round that victory is unlikely, saving their powerful weapons for use during the next round. Because weapons and armor are expensive, preserving them can significantly improve a team's economy moving forward. However, part of saving also involves intentionally giving up on the round, which might be troublesome of the opponent is nearing a victory and gives up the opportunity to take away expensive weapons from the opponent, thus also harming their economy.
+\bigbreak
+Therefore, this work aims to develop a decision-making framework that maximizes match win probability by evaluating the trade-offs between saving and fully committing to a round, with the goal of determining when saving constitutes the optimal strategic choice. From there, we can also evaluate if there are opportunities for optimization within the professional scene.
+
+\section{Interesting Articles}
+\href{https://arxiv.org/abs/2109.12990}{Xenopoulos et al. (2021)} looks at the decision-making process behind investing a lot in a round to win (buying) or investing little (saving) in hopes of winning future rounds using a gradient-boosting / neural network framework. However, this work only extends to pre-round purchasing decisions as opposed to the decision to save important weapons in the middle of the round for future use.
+\bigbreak
+\href{https://arxiv.org/abs/2008.05131}{Zeng et al. (2020)} looks at a similar problem as Xenopoulos et al. (2021) but investigates the usage of an agent which looks to learn the reasons behind purchasing decisions and adapt to players' preferences.
+\bigbreak
+
+\href{https://www.sloansportsconference.com/research-papers/evaluating-player-actions-in-professional-counter-strike-using-temporal-heterogeneous-graph-neural-networks}{Szmida and Toka (2025)} build a Temporal Heterogeneous Graph Neural Network to predict round win-probabilities based on tracking data. This approach might be useful in determining whether saving is the optimal decision by using the probability of winning the round if the team were to not save. However, this approach has only been applied to a single battleground, so further work would be needed to apply to all played battlegrounds.
+
+\bigbreak
+In an informal blog, \href{https://www.hltv.org/news/35622/saving-how-bad-is-it?utm_source=chatgpt.com}{Harry Richards (NEROcs)} looks directly at the issue of saving but only uses naive statistics as opposed to a match-win probability framework. 
+
+\bigbreak
+To facilitate data gathering, the \href{https://github.com/pnxenopoulos/awpy}{awpy} parser allows downloadable match replays of professional matches to be turned into json files describing the tracking data of the game. 
+\bigbreak
+Furthermore, the \href{https://github.com/pnxenopoulos/esta}{esta} dataset is a collection of this data. However, this data originates from a previous version of the game (CS:GO), and would not be very applicable to the current version due to the large amounts of changes between the versions.
+
+
+% THE DOCUMENT IS ESSENTIALLY DONE AT THIS POINT, NO NEED TO EDIT ANYTHING BELOW THIS______________________________________________________________________________________________
+ 
+\end{document}
