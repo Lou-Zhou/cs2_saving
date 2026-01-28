@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\newcommand{\cont}{\subseteq}
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax% just so we can load this and rsfs
+\usepackage[scr]{rsfso}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue,
+citecolor=blue, urlcolor=blue]{hyperref}
+
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\newcommand{\ddx}{\frac{d}{dx}}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\newcommand{\dfdx}{\frac{df}{dx}}
+\newcommand{\ddxp}[1]{\frac{d}{dx}\left( #1 \right)}
+\newcommand{\dydx}{\frac{dy}{dx}}
+\let\ds\displaystyle
+\newcommand{\intx}[1]{\int #1 \, dx}
+\newcommand{\intt}[1]{\int #1 \, dt}
+\newcommand{\defint}[3]{\int_{#1}^{#2} #3 \, dx}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\un}{\cup}
+\newcommand{\inter}{\cap}
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newtheorem*{sol}{Solution}
+\newtheorem*{claim}{Claim}
+\newtheorem{problem}{Problem}
+\setlength{\parindent}{0pt}
+\begin{document}
+ 
+% EVERYTHING ABOVE THIS LINE IS JUST PREABLE, NO NEED TO MESS WITH IT.__________________________________________________________________________________________
+%
+
+\lhead{SMGT 490}
+\chead{Lou Zhou}
+\rhead{\today}
+ 
+% \maketitle
+\begin{center}
+\textbf{\Large{CS2 Saving Research Proposal}}
+\end{center}
+\begin{itemize}
+    \item Currently, no formal work has been done in regards to the mid-round decision to ``save'', which entails intentionally giving up on a round to save expensive and useful weapons and utility for use in the future
+    \begin{itemize}
+        \item There has been some work in regards to economic decisions in Counter-Strike, but only in regards to pre-round decisions to invest large amounts of money or small amounts of money
+    \end{itemize}
+    \item Like similar works in traditional sports, we hope to model this issue through a win-probability maximization lens where we take the decision to maximize the probability of winning the entire game.
+    \item To do this, two models will be needed:
+    \begin{itemize}
+        \item A round-by-round win probability model which describes the probability of winning given the score and the economies of both teams. This would likely be a Markov Chain approach where we assign a win-probability for each state, with a state describing the score, map, and economies of each team.
+        \item An in-round MDP, where within each round, we look at the probability of reaching a specific absorbing state (e.g. losing the round, but saving a lot of dangerous weapons) from the current state given the action taken (saving or going for the round). The absorbing state will then be used to calculate the state in the previous markov-chain approach and a win-probability will be derived from that absorbing state. The match win probability associated with that induced state will then serve as the terminal value for the in-round MDP.
+    \end{itemize}
+    \item Using this formulation, we can then determine if / when the action of saving or going for the round is optimal and see if the current professional scene is too conservative or aggressive in regards to these actions.
+    \item Using the awpy package, we get both event and tracking data to derive transition probabilities from saved versions of professional matches (called demo files)
+    \begin{itemize}
+        \item These demo files are available for public download on HLTV.org
+    \end{itemize}
+\end{itemize}
+
+
+
+% THE DOCUMENT IS ESSENTIALLY DONE AT THIS POINT, NO NEED TO EDIT ANYTHING BELOW THIS______________________________________________________________________________________________
+ 
+\end{document}
