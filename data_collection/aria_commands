@@ -1,0 +1,16 @@
+aria2c -i /home/lz80/cs2_saving/data_collection/hltv_links \
+       -d /home/lz80/rdf/sp161/shared/cs2_saving/raw_data \
+       -x 1 -s 1 \
+       -j 1 \
+       --min-split-size=5M \
+       --file-allocation=trunc \
+       --summary-interval=60 \
+       --retry-wait=10 \
+       --max-tries=5 \
+       --timeout=60 \
+       -c
+
+
+#failed:
+https://www.hltv.org/download/demo/102951
+https://www.hltv.org/download/demo/102939

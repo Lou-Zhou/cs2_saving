@@ -1,0 +1,108 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+
+\title{Optimizing Saving Decisions in Counter-Strike 2}	% Presentation title
+\author{Lou Zhou}								% Presentation author
+\institute{Rice University}					% Author affiliation
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+\section{Section One}
+
+\begin{frame}{Counter-Strike 2}
+	5-on-5, round-based first-person shooter
+    \begin{itemize}
+		\item First to 13 rounds wins the match
+		\item Terrorist Side (Offensive) looks to plant and defend a bomb
+    \item Counter-Terrorist (Defensive) seek to defend the site / defuse the bomb
+		\item If you survive a round, weapons / utilities are carried over to the next round
+	\end{itemize}
+  Ability to use powerful weapons depends on the economy
+  \begin{itemize}
+    \item Money depends on what happens during previous rounds (e.g. winning or losing the round, getting kills)
+    \item Being able to properly manage your economy is important to winning the game
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Data}
+	Matches are saved by the game via "demo" files
+  \begin{itemize}
+    \item Demo files can be parsed via the awpy package to produce full tracking and event data
+    \item We use all demo files(259 matchups, 500+ matches) from tournaments during the later-half of the 2025 year
+    \item Demo files are available to be downloaded on HLTV.org, web-scraping to automatically download
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Saving}
+  The idea of intentionally giving up a round to "save" powerful weapons for use in future rounds
+	\begin{itemize}
+    \item Useful for situations when the round is likely lost, but still holding on to these weapons
+    \item Recently, in the professional scene, saving has been used substantially more liberally (e.g. in 5v3 situations)
+  \end{itemize}
+  We look to build a win-probability framework to determine whether this the decision is optimal
+\end{frame}
+
+
+
+\begin{frame}{Win Probability Models}
+	Building Markov-Chain win-probability model for each round
+  \begin{itemize}
+    \item Given the score, economic situations of each team, what is the probability that team $x$ wins?
+  \end{itemize}
+  With these win-probabilities, we build an in-round MDP for saving
+  \begin{itemize}
+    \item The MDP will look to reach certain terminating state
+    \begin{itemize}
+      \item e.g. Terrorist Side won, Counter-Terrorists hold on to \$5000 worth of inventory
+      \item These terminating states will then be used to calculate the state for our Markov-Chain to derive a win-probability
+    \end{itemize}
+    \item State - number of players left, value of current inventories, whether bomb has been planted, time left
+    \item Action - whether to save or continue to go for it
+    \item Value - the win-probabilities from potential ending Markov Chain states
+  \end{itemize}
+  From here, we can determine if / when it would be optimal to save
+\end{frame}
+
+
+
+\end{document}

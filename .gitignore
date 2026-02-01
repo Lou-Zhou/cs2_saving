@@ -4,6 +4,9 @@
 *.log
 *.out
 *.synctex.gz
+*.nav
+*.snm
+*.nav
+*.toc
 .venv
 .vscode
-data_collection/
